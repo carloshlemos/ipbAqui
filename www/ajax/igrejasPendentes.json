@@ -1,0 +1,121 @@
+[{
+	"id": 0,
+	"nome": "IGREJA PRESBITERIANA PARQUE DAS LARANJEIRAS",
+	"logradouro": "Rua Cardeal",
+	"complemento": "Quadra A, Lote 2",
+	"bairro": "Parque das Laranjeiras",
+	"cidade": {
+		"nome": "Goiânia",
+		"estado": "GO"
+	},
+	"cep": "74.855-220",
+	"latitude": -16.721286,
+	"longitude": -49.240628,
+	"telefone": "(62) 3282-2463",
+    "email": "ippl@ih.com.br"
+}, {
+	"id": 0,
+	"nome": "IGREJA PRESBITERIANA FILADÉLFIA",
+	"logradouro": "Avenida Goiânia",
+	"complemento": "Quadra 134 Lote 01",
+	"bairro": "Maysa II",
+	"cidade": {
+		"nome": "Trindade",
+		"estado": "GO"
+	},
+	"cep": "75380-000",    
+	"latitude": 0,
+	"longitude": 0,
+	"telefone": "(62) 3534-1549",
+    "email": ""
+}, {
+	"id": 9,
+	"nome": "IGREJA PRESBITERIANA JARDIM PRIMAVERA",
+	"logradouro": "Avenida Comercial",
+	"complemento": "Quadra 71 Lote 07",
+	"bairro": "Jardim Primavera",
+	"cidade": {
+		"nome": "Goiânia",
+		"estado": "GO"
+	},
+	"cep": "74477-228",    
+	"latitude": -16.656756,
+	"longitude": -49.303064,
+	"telefone": "",
+    "email": ""
+}, {
+	"id": 10,
+	"nome": "IGREJA PRESBITERIANA CENTRAL DE INHUMAS",
+	"logradouro": "Rua Cel. José Rodrigues Rabelo, 1184",
+	"complemento": "",
+	"bairro": "Centro",
+	"cidade": {
+		"nome": "Inhumas",
+		"estado": "GO"
+	},
+	"cep": "75400-000",    
+	"latitude": -15.720090,
+	"longitude": -49.828281,
+	"telefone": "(62) 3511-2103",
+    "email": ""
+}, {
+	"id": 11,
+	"nome": "IGREJA PRESBITERIANA TIRADENTES",
+	"logradouro": "Rua 06",
+	"complemento": "Quadra 63 Lote 17 e 18",
+	"bairro": "Jardim Tiradentes",
+	"cidade": {
+		"nome": "Aparecida de Goiânia",
+		"estado": "GO"
+	},
+	"cep": "74980-000",    
+	"latitude": -15.558996,
+	"longitude": -49.947609,
+	"telefone": "(62) 3355-1142",
+    "email": ""
+}, {
+	"id": 11,
+	"nome": "IGREJA PRESBITERIANA UNIÃO",
+	"logradouro": "Rua C-75",
+	"complemento": "Quadra 187 Lotes 10-13",
+	"bairro": "Sudoeste",
+	"cidade": {
+		"nome": "Goiânia",
+		"estado": "GO"
+	},
+	"cep": "74303–020",    
+	"latitude": -15.558996,
+	"longitude": -49.947609,
+	"telefone": "(62) 3287-2419",
+    "email": ""
+}, {
+	"id": 11,
+	"nome": "IGREJA PRESBITERIANA VERA CRUZ",
+	"logradouro": "Rua Gercina Borges Teixeira",
+	"complemento": "Quadra QC-18 Lote 10 e 12",
+	"bairro": "Conjunto Vera Cruz I",
+	"cidade": {
+		"nome": "Goiânia",
+		"estado": "GO"
+	},
+	"cep": "74493 – 060",    
+	"latitude": -15.558996,
+	"longitude": -49.947609,
+	"telefone": "(62) 3355-1142",
+    "email": ""
+}, {
+	"id": 11,
+	"nome": "IGREJA PRESBITERIANA DE VILA MORAIS",
+	"logradouro": "Rua 2, 424",
+	"complemento": "",
+	"bairro": "Vila Morais",
+	"cidade": {
+		"nome": "Goiânia",
+		"estado": "GO"
+	},
+	"cep": "74.620-320",    
+	"latitude": -15.558996,
+	"longitude": -49.947609,
+	"telefone": "(62) 3206-5435",
+    "email": ""
+}]
