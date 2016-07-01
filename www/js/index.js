@@ -23,6 +23,8 @@ var app = {
         var longitude = position.coords.longitude;
         var latitude = position.coords.latitude;
         var latLong = new google.maps.LatLng(latitude, longitude);
+        var directionsDisplay;
+        var directionsService = new google.maps.DirectionsService();
 
         var mapOptions = {
             center: latLong,
@@ -34,6 +36,17 @@ var app = {
         console.info(" ##################### CARREGOU O MAPA #####################");
 
         $.getJSON("ajax/igrejas.json", function (data) {
+
+                var pinColor = "16A085"; // Verde do site da IPB
+                var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+                    new google.maps.Size(21, 34),
+                    new google.maps.Point(0, 0),
+                    new google.maps.Point(10, 34));
+                var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
+                    new google.maps.Size(40, 37),
+                    new google.maps.Point(0, 0),
+                    new google.maps.Point(12, 35));
+
                 var marker_local_Atual = new google.maps.Marker({
                     position: latLong,
                     map: map,
@@ -48,6 +61,7 @@ var app = {
                     var marker = new google.maps.Marker({
                         position: new google.maps.LatLng(marker_data.latitude, marker_data.longitude),
                         map: map,
+                        icon: pinImage,
                         title: marker_data.nome,
                         snippet: '<b>Endereço:</b> ' + marker_data.logradouro + ", " + marker_data.complemento + ", " + marker_data.bairro + " - " + marker_data.cidade
                     });
@@ -73,7 +87,31 @@ var app = {
             })
             .always(function () {
                 console.log("complete");
-            });;
+            });
+
+
+        function calcRoute(start, end, directionsDisplay, directionsService, map) {
+            start = new google.maps.LatLng(37.334818, -121.884886);
+            end = new google.maps.LatLng(37.441883, -122.143019);
+            var bounds = new google.maps.LatLngBounds();
+            bounds.extend(start);
+            bounds.extend(end);
+            map.fitBounds(bounds);
+            var request = {
+                origin: start,
+                destination: end,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                    directionsDisplay.setMap(map);
+                } else {
+                    alert("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
+                }
+            });
+        }
+
     },
 
     onError: function (error) {
