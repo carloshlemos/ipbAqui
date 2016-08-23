@@ -35,7 +35,9 @@ var app = {
         var map = new google.maps.Map(document.getElementById("map"), mapOptions);
         console.info(" ##################### CARREGOU O MAPA #####################");
 
-        $.getJSON("ajax/igrejas.json", function (data) {
+        var igrejasAPI = "http://191.222.238.253:8080/igrejas?jsoncallback=?";
+        
+        $.getJSON(igrejasAPI, function (data) {
 
                 var pinColor = "16A085"; // Verde do site da IPB
                 var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
