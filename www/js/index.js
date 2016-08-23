@@ -35,62 +35,77 @@ var app = {
         var map = new google.maps.Map(document.getElementById("map"), mapOptions);
         console.info(" ##################### CARREGOU O MAPA #####################");
 
-        var igrejasAPI = "http://191.222.238.253:8080/igrejas?jsoncallback=?";
+        var igrejasAPI = "http://191.222.238.253:8080/igrejas";
         
-        $.getJSON(igrejasAPI, function (data) {
+        $.ajax({
+            url: igrejasAPI,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            dataType: "json",
+            async: true,
+            success: function (result) {
+                $.getJSON(result, function (data) {
 
-                var pinColor = "16A085"; // Verde do site da IPB
-                var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
-                    new google.maps.Size(21, 34),
-                    new google.maps.Point(0, 0),
-                    new google.maps.Point(10, 34));
-                var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
-                    new google.maps.Size(40, 37),
-                    new google.maps.Point(0, 0),
-                    new google.maps.Point(12, 35));
+                        var pinColor = "16A085"; // Verde do site da IPB
+                        var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+                            new google.maps.Size(21, 34),
+                            new google.maps.Point(0, 0),
+                            new google.maps.Point(10, 34));
+                        var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
+                            new google.maps.Size(40, 37),
+                            new google.maps.Point(0, 0),
+                            new google.maps.Point(12, 35));
 
-                var marker_local_Atual = new google.maps.Marker({
-                    position: latLong,
-                    map: map,
-                    title: 'Meu Local'
-                });
-                console.info(" ##################### SETOU O LOCAL ATUAL #####################");
+                        var marker_local_Atual = new google.maps.Marker({
+                            position: latLong,
+                            map: map,
+                            title: 'Meu Local'
+                        });
+                        console.info(" ##################### SETOU O LOCAL ATUAL #####################");
 
-                var infowindow = new google.maps.InfoWindow();
+                        var infowindow = new google.maps.InfoWindow();
 
-                $.each(data, function (i, marker_data) {
-                    console.info(" ##################### IGREJA ##################### " + marker_data.nome);
-                    var marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(marker_data.latitude, marker_data.longitude),
-                        map: map,
-                        icon: pinImage,
-                        title: marker_data.nome,
-                        snippet: '<b>Endereço:</b> ' + marker_data.logradouro + ", " + marker_data.complemento + ", " + marker_data.bairro + " - " + marker_data.cidade
+                        $.each(data, function (i, marker_data) {
+                            console.info(" ##################### IGREJA ##################### " + marker_data.nome);
+                            var marker = new google.maps.Marker({
+                                position: new google.maps.LatLng(marker_data.latitude, marker_data.longitude),
+                                map: map,
+                                icon: pinImage,
+                                title: marker_data.nome,
+                                snippet: '<b>Endereço:</b> ' + marker_data.logradouro + ", " + marker_data.complemento + ", " + marker_data.bairro + " - " + marker_data.cidade
+                            });
+
+                            var igreja = '<b>Igreja:</b> ' + marker_data.nome;
+                            var endereco = '<br><b>Endereço:</b> ' + marker_data.logradouro + ", " + marker_data.complemento + ", " + marker_data.bairro;
+                            var cep = '<br><b>Cep:</b> ' + marker_data.cep;
+                            var telefone = '<br><b>Telefone:</b> ' + marker_data.telefone;
+                            var email = '<br><b>Email:</b> ' + marker_data.email;
+
+                            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                                return function () {
+                                    infowindow.setContent(igreja + endereco + cep + telefone);
+                                    infowindow.open(map, marker);
+                                }
+                            })(marker, i));
+                        });
+                    }).done(function () {
+                        console.log("second success");
+                    })
+                    .fail(function (jqxhr, textStatus, error) {
+                        console.info(" ##################### " + jqxhr + ", " + textStatus + ", " + error + " ##################### ");
+                    })
+                    .always(function () {
+                        console.log("complete");
                     });
-
-                    var igreja = '<b>Igreja:</b> ' + marker_data.nome;
-                    var endereco = '<br><b>Endereço:</b> ' + marker_data.logradouro + ", " + marker_data.complemento + ", " + marker_data.bairro;
-                    var cep = '<br><b>Cep:</b> ' + marker_data.cep;
-                    var telefone = '<br><b>Telefone:</b> ' + marker_data.telefone;
-                    var email = '<br><b>Email:</b> ' + marker_data.email;
-
-                    google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                        return function () {
-                            infowindow.setContent(igreja + endereco + cep + telefone);
-                            infowindow.open(map, marker);
-                        }
-                    })(marker, i));
-                });
-            }).done(function () {
-                console.log("second success");
-            })
-            .fail(function (jqxhr, textStatus, error) {
-                console.info(" ##################### " + jqxhr + ", " + textStatus + ", " + error + " ##################### ");
-            })
-            .always(function () {
-                console.log("complete");
-            });
-
+                
+            },
+            error: function (xhr, status, thrownError) {
+                ErroCallBack(xhr);
+            }
+        });        
+        
 
         function calcRoute(start, end, directionsDisplay, directionsService, map) {
             start = new google.maps.LatLng(37.334818, -121.884886);
